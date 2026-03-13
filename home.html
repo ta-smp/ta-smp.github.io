@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tristan Simpson · front‑end engineer</title>
+  <!-- Google Fonts & modern CSS reset -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) for clean icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- modern reset & variables ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background-color: #fafbfc;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --max-width: 1200px;
+      --border-light: 1px solid #e9edf2;
+      --card-bg: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --text-light: #64748b;
+      --text-dark: #0f172a;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-hover: 0 12px 24px -8px rgba(0, 37, 85, 0.12);
+      --radius-md: 16px;
+      --radius-sm: 10px;
+    }
+
+    /* ----- utility classes ----- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-md);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-title i {
+      color: var(--accent);
+      font-size: 2rem;
+    }
+
+    /* chips / tags */
+    .skill-tag {
+      background: #f1f4f9;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1e293b;
+      transition: 0.1s ease;
+      display: inline-block;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .skill-tag:hover {
+      background: #e6edf8;
+      border-color: var(--accent-soft);
+    }
+
+    /* header / nav */
+    .navbar {
+      background: var(--card-bg) / 80%;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem var(--space-md);
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .logo a {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: color 0.2s;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* hero */
+    .hero {
+      padding: var(--space-lg) 0 var(--space-md);
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-content {
+      flex: 1 1 400px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1rem;
+    }
+    .hero-content h1 {
+      font-size: 3.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: var(--text-dark);
+    }
+    .hero-highlight {
+      color: var(--accent);
+      border-bottom: 3px solid var(--accent-soft);
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 550px;
+      margin-bottom: 2rem;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      background: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      border: var(--border-light);
+      transition: 0.15s;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-item i {
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+    .contact-item:hover {
+      background: #f8fafd;
+      border-color: #b9d1fb;
+      transform: translateY(-2px);
+    }
+    .hero-avatar {
+      flex: 0 0 180px;
+      text-align: center;
+      background: white;
+      border-radius: 50%;
+      box-shadow: var(--shadow-hover);
+      border: 6px solid white;
+    }
+    .avatar-placeholder {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(145deg, #2563eb10, #dbeafe);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--accent);
+      border: 2px solid white;
+    }
+
+    /* summary card */
+    .summary-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin: var(--space-md) 0 var(--space-lg);
+      border: var(--border-light);
+      box-shadow: var(--shadow-sm);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-dark);
+    }
+
+    /* skill clusters */
+    .skills-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .skill-category h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .skill-category h3 i {
+      color: var(--accent);
+      width: 1.8rem;
+    }
+    .skill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    /* experience cards */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .exp-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      border: var(--border-light);
+      box-shadow: var(--shadow-sm);
+      transition: 0.2s;
+    }
+    .exp-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .exp-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .exp-company {
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .exp-date {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      background: #f1f4f9;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+    }
+    .exp-desc {
+      list-style: none;
+    }
+    .exp-desc li {
+      margin-bottom: 0.6rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .exp-desc li i {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+      min-width: 1.2rem;
+    }
+
+    /* project placeholders – exactly 3 cards */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-md);
+      margin: var(--space-md) 0 var(--space-lg);
+    }
+    .project-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      border: var(--border-light);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #b9d1fb;
+      box-shadow: var(--shadow-hover);
+    }
+    .project-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .project-card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .project-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0.8rem 0 1rem;
+    }
+    .project-meta span {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+    }
+    .project-placeholder-desc {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .project-link {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 1rem;
+    }
+    .project-link i {
+      transition: transform 0.2s;
+    }
+    .project-link:hover i {
+      transform: translateX(4px);
+    }
+
+    /* footer / links */
+    .footer {
+      border-top: var(--border-light);
+      padding: var(--space-md) 0;
+      margin-top: var(--space-lg);
+      text-align: center;
+      color: var(--text-light);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.3rem;
+      transition: 0.2s;
+    }
+    .social-links a:hover {
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* responsiveness */
+    @media (max-width: 650px) {
+      .hero-content h1 { font-size: 2.4rem; }
+      .nav-container { flex-direction: column; gap: 0.8rem; }
+      .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .hero-grid { justify-content: center; text-align: center; }
+      .contact-links { justify-content: center; }
+      .section-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- simple navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo"><a href="#home">TS<span style="color:#2563eb;">.</span></a></div>
+      <div class="nav-links">
+        <a href="#work">work</a>
+        <a href="#skills">skills</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- hero / home section -->
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="hero-badge"><i class="fas fa-code" style="margin-right:6px;"></i> front‑end engineer</span>
+          <h1>
+            Tristan <span class="hero-highlight">Simpson</span>
+          </h1>
+          <p class="hero-sub">React · TypeScript · accessibility · scalable UI</p>
+          <div class="contact-links">
+            <a href="mailto:tasimpson.hd@icloud.com" class="contact-item"><i class="fas fa-envelope"></i> tasimpson.hd</a>
+            <a href="tel:+18032212983" class="contact-item"><i class="fas fa-phone-alt"></i> 803-221-2983</a>
+            <span class="contact-item"><i class="fas fa-map-marker-alt"></i> Charlotte, NC</span>
+          </div>
+        </div>
+        <div class="hero-avatar">
+          <div class="avatar-placeholder">TS</div>
+        </div>
+      </div>
+
+      <!-- summary from resume -->
+      <div class="summary-card">
+        <i class="fas fa-quote-left" style="color: #2563eb30; margin-right: 8px;"></i>
+        Detail-oriented Front End Engineer with 5+ years of experience building scalable, accessible, and high‑performance web applications. Expertise in modern JavaScript (React, TypeScript), state management, and UI component libraries. Committed to WCAG & Section 508 compliance, performance optimization, and agile collaboration.
+      </div>
+    </section>
+
+    <!-- skills section – matching resume categories -->
+    <section id="skills">
+      <div class="section-title">
+        <i class="fas fa-cog"></i> <span>technical skills</span>
+      </div>
+      <div class="skills-wrapper">
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Languages & core</h3>
+          <div class="skill-cloud">
+            <span class="skill-tag">JavaScript (ES6+)</span><span class="skill-tag">TypeScript</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-cubes"></i> Frameworks & libraries</h3>
+          <div class="skill-cloud">
+            <span class="skill-tag">React</span><span class="skill-tag">Redux</span><span class="skill-tag">Context API</span><span class="skill-tag">React Router</span><span class="skill-tag">TanStack Query</span><span class="skill-tag">Next.js</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-paint-brush"></i> Styling</h3>
+          <div class="skill-cloud">
+            <span class="skill-tag">SASS/SCSS</span><span class="skill-tag">CSS Modules</span><span class="skill-tag">Material UI</span><span class="skill-tag">TailwindCSS</span><span class="skill-tag">Styled Components</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-database"></i> Data handling</h3>
+          <div class="skill-cloud">
+            <span class="skill-tag">RESTful APIs</span><span class="skill-tag">Axios</span><span class="skill-tag">GraphQL</span><span class="skill-tag">TanStack</span><span class="skill-tag">Fetch API</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-wrench"></i> Tools & testing</h3>
+          <div class="skill-cloud">
+            <span class="skill-tag">Vite</span><span class="skill-tag">Webpack</span><span class="skill-tag">Storybook</span><span class="skill-tag">Jest</span><span class="skill-tag">React Testing Library</span><span class="skill-tag">Lighthouse</span><span class="skill-tag">Git</span><span class="skill-tag">Jenkins</span><span class="skill-tag">Docker</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-universal-access"></i> Other</h3>
+          <div class="skill-cloud">
+            <span class="skill-tag">WCAG</span><span class="skill-tag">ARIA</span><span class="skill-tag">Section 508</span><span class="skill-tag">Agile/Scrum</span><span class="skill-tag">React Hook Form</span><span class="skill-tag">Module Federation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- work experience (from resume) -->
+    <section id="work">
+      <div class="section-title">
+        <i class="fas fa-briefcase"></i> <span>experience</span>
+      </div>
+      <div class="timeline">
+        <!-- USGS -->
+        <div class="exp-card">
+          <div class="exp-header">
+            <span class="exp-title">Front End Engineer <span class="exp-company">· MicroTheory Engineering (contract @ USGS)</span></span>
+            <span class="exp-date">Sep 2023 – July 2025</span>
+          </div>
+          <ul class="exp-desc">
+            <li><i class="fas fa-caret-right"></i> Developed PWA for nationwide freshwater data collection used by USGS scientists.</li>
+            <li><i class="fas fa-caret-right"></i> Built scalable UI with React, TypeScript, Redux, Material UI; integrated REST APIs via TanStack Query & Axios.</li>
+            <li><i class="fas fa-caret-right"></i> Contributed to in‑house design system (Storybook, custom theming).</li>
+            <li><i class="fas fa-caret-right"></i> Ensured WCAG / Section 508 compliance (Lighthouse, JAWS).</li>
+          </ul>
+        </div>
+        <!-- CMS -->
+        <div class="exp-card">
+          <div class="exp-header">
+            <span class="exp-title">User Interface Developer <span class="exp-company">· PROTEK Consulting (contract @ CMS)</span></span>
+            <span class="exp-date">Aug 2022 – Aug 2023</span>
+          </div>
+          <ul class="exp-desc">
+            <li><i class="fas fa-caret-right"></i> Built Agent Broker Compensation modules for CMS.gov using React, Redux, TypeScript, CMS Design System.</li>
+            <li><i class="fas fa-caret-right"></i> Performance optimization: memoization, code splitting, bundle analysis.</li>
+            <li><i class="fas fa-caret-right"></i> Developed type‑safe API client with Axios & GraphQL; worked with React microservices.</li>
+          </ul>
+        </div>
+        <!-- TaxSlayer -->
+        <div class="exp-card">
+          <div class="exp-header">
+            <span class="exp-title">Front End Engineer <span class="exp-company">· TaxSlayer</span></span>
+            <span class="exp-date">Sep 2020 – Feb 2022</span>
+          </div>
+          <ul class="exp-desc">
+            <li><i class="fas fa-caret-right"></i> Refactored legacy Razor pages to React with TypeScript, Context API, Axios.</li>
+            <li><i class="fas fa-caret-right"></i> Optimized REST interactions using GraphQL, reduced load times.</li>
+            <li><i class="fas fa-caret-right"></i> Led accessibility (Section 508) efforts; introduced semantic versioning for micro‑frontends.</li>
+          </ul>
+        </div>
+        <!-- Sparq -->
+        <div class="exp-card">
+          <div class="exp-header">
+            <span class="exp-title">Junior Consultant <span class="exp-company">· Sparq</span></span>
+            <span class="exp-date">Sep 2019 – May 2020</span>
+          </div>
+          <ul class="exp-desc">
+            <li><i class="fas fa-caret-right"></i> Translated mockups into responsive UIs (React, Redux, Material UI).</li>
+            <li><i class="fas fa-caret-right"></i> Contributed to C#/.NET REST API, used Axios & GraphQL; production PRs within two weeks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 project placeholders – exactly 3 cards, you can replace content later -->
+    <section id="projects">
+      <div class="section-title">
+        <i class="fab fa-github"></i> <span>featured projects</span>
+      </div>
+      <div class="project-grid">
+        <!-- project 1 placeholder -->
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-map"></i></div>
+          <h3>USGS Field PWA</h3>
+          <div class="project-meta"><span>React</span><span>PWA</span><span>TanStack</span></div>
+          <p class="project-placeholder-desc">Offline‑first progressive web app for freshwater data collection – used by scientists nationwide. (placeholder – edit later)</p>
+          <a href="#" class="project-link" onclick="return false;">github repo <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- project 2 placeholder -->
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-palette"></i></div>
+          <h3>design system / storybook</h3>
+          <div class="project-meta"><span>TypeScript</span><span>MUI</span><span>Storybook</span></div>
+          <p class="project-placeholder-desc">Reusable component library with custom theming, accessibility baked in. (placeholder – replace with your own)</p>
+          <a href="#" class="project-link" onclick="return false;">github repo <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- project 3 placeholder -->
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>agent broker modules</h3>
+          <div class="project-meta"><span>GraphQL</span><span>micro-frontend</span></div>
+          <p class="project-placeholder-desc">CMS.gov compensation modules with code splitting, GraphQL client. (placeholder – update later)</p>
+          <a href="#" class="project-link" onclick="return false;">github repo <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <!-- hint to yourself -->
+      <p style="font-size:0.9rem; color:var(--text-light); text-align:right;"><i class="fas fa-pen"></i> you can replace placeholder text & links anytime</p>
+    </section>
+
+    <!-- contact & social links exactly from resume + placeholders -->
+    <section id="contact" style="margin: var(--space-lg) 0 var(--space-md);">
+      <div class="section-title">
+        <i class="fas fa-address-card"></i> <span>connect</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; background: white; border-radius: 60px; padding: 1.5rem 2rem; border: var(--border-light);">
+        <a href="https://github.com/ta-smp" target="_blank" class="contact-item" style="background: #f8fafc;"><i class="fab fa-github"></i> ta‑smp</a>
+        <a href="https://codepen.io/saucebyt" target="_blank" class="contact-item"><i class="fab fa-codepen"></i> saucebyt</a>
+        <a href="https://linkedin.com/in/tristan-simpson" target="_blank" class="contact-item"><i class="fab fa-linkedin-in"></i> tristan‑simpson</a>
+        <a href="mailto:tasimpson.hd@icloud.com" class="contact-item"><i class="fas fa-envelope"></i> email</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="social-links">
+      <a href="https://github.com/ta-smp" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://codepen.io/saucebyt" target="_blank" aria-label="CodePen"><i class="fab fa-codepen"></i></a>
+      <a href="https://linkedin.com/in/tristan-simpson" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p style="font-size: 0.9rem;">© 2026 Tristan Simpson – built from resume · all icons FA</p>
+  </footer>
+
+  <!-- very light JS to make placeholder links non-redirect (optional) but keep ux smooth -->
+  <script>
+    (function() {
+      // just prevent default on placeholder project links if accidentally clicked
+      const placeholders = document.querySelectorAll('.project-link[onclick]');
+      placeholders.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('✨ you can update this link with your real GitHub project.');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
